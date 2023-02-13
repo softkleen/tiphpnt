@@ -1,24 +1,28 @@
 <?php 
-include 'conn/connect.php';
-$lista = $conn->query("select * from vw_tbprodutos");
-$row_produtos = $lista->fetch_assoc();
+include "conn/connect.php";
+$busca = $_GET['buscar'];
+$lista = $conn->query("select * from vw_tbprodutos where descri_produto like '%$busca%' or rotulo_tipo like '%$busca%' ");
+$row_produto = $lista->fetch_assoc();
 $num_linhas = $lista->num_rows;
+
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
-    <title>Produtos</title>
+    <title>Busca por palavra</title>
 </head>
-<body >
-   
-   
-        <!-- monstrar se a consulta retornar vazio -->
-        <?php if($num_linhas == 0){ ?>
+<body class="fundofixo">
+   <?php include "menu_publico.php"; ?> 
+    <div class="container">
+
+     <!-- monstrar se a consulta retornar vazio -->
+     <?php if($num_linhas == 0){ ?>
             <h2 class="breadcrumb alert-danger">
                 Não há produtos cadastrados
             </h2>
@@ -32,24 +36,24 @@ $num_linhas = $lista->num_rows;
                 <?php do{ ?>
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
-                            <a href="produto_detalhes.php?id_produto=<?php echo $row_produtos['id_produto']?>">
-                                <img src="images/<?php echo $row_produtos['imagem_produto']?>" class="img-responsive img-rounded">
+                            <a href="produto_detalhes.php?id_produto=<?php echo $row_produto['id_produto']?>">
+                                <img src="images/<?php echo $row_produto['imagem_produto']?>" class="img-responsive img-rounded">
                             </a>
                             <div class="caption text-right">
                                 <h3 class="text-danger">
-                                    <strong><?php echo $row_produtos['descri_produto']?></strong>
+                                    <strong><?php echo $row_produto['descri_produto']?></strong>
                                 </h3>
                                 <p class="text-warning">
-                                    <strong><?php echo $row_produtos['rotulo_tipo']?></strong>
+                                    <strong><?php echo $row_produto['rotulo_tipo']?></strong>
                                 </p>
                                 <p class="text-left">
-                                   <?php echo mb_strimwidth($row_produtos['resumo_produto'],0,42,'...'); ?>
+                                   <?php echo mb_strimwidth($row_produto['resumo_produto'],0,42,'...'); ?>
                                 </p>
                                 <p>
                                     <button class="btn btn-default disabled" role="button" style="cursor:default;">
-                                        <?php echo "R$ ".number_format($row_produtos['valor_produto'], 2,',','.'); ?>
+                                        <?php echo "R$ ".number_format($row_produto['valor_produto'], 2,',','.'); ?>
                                     </button>
-                                    <a href="produto_detalhes.php?id_produto=<?php echo $row_produtos['id_produto'];?>">
+                                    <a href="produto_detalhes.php?id_produto=<?php echo $row_produto['id_produto'];?>">
                                         <span class="hidden-xs">Saiba mais...</span>
                                         <span class="hidden-xs glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                     </a>
@@ -59,12 +63,11 @@ $num_linhas = $lista->num_rows;
                             
                         </div>
                     </div>
-                <?php }while($row_produtos = $lista->fetch_assoc()); ?>
+                <?php }while($row_produto = $lista->fetch_assoc()); ?>
             </div>
         <?php }?>
-  
 
-
-
-
+    </div>
+    
 </body>
+</html>

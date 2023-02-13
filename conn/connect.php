@@ -1,9 +1,9 @@
 <?php
 
-$host = "localhost";
+$host = "10.91.43.26";
 $database = "ti93phpdb01";
-$user= "root";
-$pass = "";
+$user= "senacitq";
+$pass = "senac";
 $charset = "utf8";
 $port = "3306";
 

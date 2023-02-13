@@ -1,8 +1,21 @@
 /* definindo nosso estilo... */ 
 @charset "utf8";
 
+body
+{
+    margin-top: 40px;
+    padding-top: 40px;
+}
+
 .fundofixo{
     background: url('../images/churrascaria.jpg') no-repeat fixed;
     -webkit-background-size:cover;
     background-size: cover;
 }
+.fundo-branco{
+    background-color: aliceblue;
+}
+/* nav{
+    position:absolute ;
+
+} */

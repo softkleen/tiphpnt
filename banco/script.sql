@@ -1,4 +1,4 @@
--- Database: `iwane047_ti##`
+-- Database: 
 CREATE DATABASE
 	IF NOT EXISTS `ti93phpdb01`
     DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -61,7 +61,7 @@ ALTER TABLE `tbtipos`
 CREATE TABLE `tbusuarios` (
   `id_usuario` int(11) NOT NULL,
   `login_usuario` varchar(30) NOT NULL,
-  `senha_usuario` varchar(8) NOT NULL,
+  `senha_usuario` varchar(32) NOT NULL,
   `nivel_usuario` ENUM('sup','com') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -69,10 +69,10 @@ CREATE TABLE `tbusuarios` (
 INSERT INTO `tbusuarios` 
 	(`id_usuario`, `login_usuario`, `senha_usuario`, `nivel_usuario`) 
 	VALUES
-		(1, 'senac', '1234', 'sup'),
-		(2, 'joao', '456', 'com'),
-		(3, 'maria', '789', 'com'),
-		(4, 'iwanezuk', '1234', 'sup');
+		(1, 'senac', md5('1234'), 'sup'),
+		(2, 'joao', md5('456'), 'com'),
+		(3, 'maria', md5('789'), 'com'),
+		(4, 'well', md5('1234'), 'sup');
 
 -- Índices de tabela `tbtipos`
 ALTER TABLE `tbusuarios`
